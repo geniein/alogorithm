@@ -9,24 +9,24 @@ void quickSort( int *data, int start, int end ){
 		return;
 	}
 	
-	int pivot;
-	pivot = data[start];
+	int key;
+	key = start;
 	
 	int i = start + 1, j = end, temp;
 	
 	while(i <=j){	
-		while(data[i]>pivot){		
+		while(data[i]<data[key]){		
 			i++;
 		}
 		
-		while(data[j]>pivot){		
+		while(data[j]>data[key]){		
 			j--;
 		}
 		
 		if(i > j){
 				temp = data[j];
-				data[i] = data[j];
-				data[j] = data[i];			
+				data[j] = data[key];
+				data[key] = temp;			
 		}else {
 				temp = data[i];
 				data[i] = data[j];
