@@ -15,11 +15,11 @@ void quickSort( int *data, int start, int end ){
 	int i = start + 1, j = end, temp;
 	
 	while(i <=j){	
-		while(data[i]<data[key]){		
+		while(data[i]<=data[key] && i <= end){		
 			i++;
 		}
 		
-		while(data[j]>data[key]){		
+		while(data[j]>=data[key] && j > start){		
 			j--;
 		}
 		
