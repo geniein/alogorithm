@@ -12,12 +12,14 @@ public class LargestValue {
         /** 2 **/
         for(int i=0; i<strNumbers.length; i++) {
             strNumbers[i] = String.valueOf(numbers[i]);
+            System.out.println(strNumbers[i]+",");
         }
         
-        /** 3 **/
+        /** 3 **/        
         Arrays.sort(strNumbers, new Comparator<String>() {
             @Override
             public int compare(String number1, String number2) {
+                System.out.println("number1: "+number1 + " number2: "+number2);
                 return (number2+number1).compareTo(number1+number2);
             }
         });
@@ -35,7 +37,7 @@ public class LargestValue {
     }
 
     public static void main(String[] args) {
-        int[] numbers = {6,20,1,21};
+        int[] numbers = {4,2,5,1,3};
 
         LargestValue largestValue;
         largestValue = new LargestValue();
@@ -43,6 +45,6 @@ public class LargestValue {
         String result = "";
         result = largestValue.solution(numbers);
         
-        System.out.println("result : " + result);
+       //System.out.println("result : " + result);
     }
 }
