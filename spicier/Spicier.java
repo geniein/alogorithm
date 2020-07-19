@@ -17,30 +17,55 @@ class Solution {
 
     class Spicier{
 
-        public int spicier(int[]  scoville, int K){
-            int answer = 0;
+        // public int spicier(int[]  scoville, int K){
+        //     int answer = 0;
             
-            PriorityQueue<Integer> priorityQueue = new PriorityQueue<Integer>();
+        //     PriorityQueue<Integer> priorityQueue = new PriorityQueue<Integer>();
 
-            for(int i=0; i<scoville.length; i++){
-                priorityQueue.offer(scoville[i]);
-            }
+        //     for(int i=0; i<scoville.length; i++){
+        //         priorityQueue.offer(scoville[i]);
+        //     }
             
-            while(priorityQueue.peek() < K){
-                int result = 0;                
+        //     while(priorityQueue.peek() < K){
+        //         int result = 0;                
                 
-                if(priorityQueue.size() <2){
-                    return -1;
-                }
+        //         if(priorityQueue.size() <2){
+        //             return -1;
+        //         }
 
-                int a = priorityQueue.poll();
-                int b = priorityQueue.poll();
+        //         int a = priorityQueue.poll();
+        //         int b = priorityQueue.poll();
                 
-                result = a + (b*2);
-                priorityQueue.offer(result);
-                answer++;
-            }
-            return answer;
+        //         result = a + (b*2);
+        //         priorityQueue.offer(result);
+        //         answer++;
+        //     }
+        //     return answer;
+        // }
+       
+    }
+    public int solution(int[] scoville, int K) {
+        int answer = 0;
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        for(int value : scoville){
+            pq.add(value);
         }
+
+        while(pq.peek() < K){            
+            int nextValue = pq.poll() + (pq.poll() * 2);
+            pq.add(nextValue);
+            if(pq.size()<2 && nextValue < K){
+                return -1;
+            }
+            answer++;
+        }
+        System.out.println(answer);
+        return answer;
+    }
+    public static void main(String[] args) {
+        int[] scoville = {1, 2, 3, 9, 10, 12};
+        new Solution().solution(scoville, 7);
+
     }
 }
