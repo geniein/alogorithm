@@ -22,7 +22,7 @@ class File implements Comparable<File>{
     public String toString() {
         return head + number + tail;
     }
-}
+
 
 public static File[] sort(File[] file) {
         Queue<File[]> q = new LinkedList<File[]>();
@@ -49,4 +49,5 @@ public static File[] merge(File[] x, File[] y) {
     while (left < leftEnd) tmp[count++] = x[left++];
     while (right < rightEnd) tmp[count++] = y[right++];
     return tmp;
+}
 }

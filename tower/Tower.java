@@ -14,45 +14,78 @@ package tower;
 
 import java.util.*;
 
-class Solution {
-    class Tower {
-        int idx;
-        int height;
+class Tower {
+    // class Tower {
+    //     int idx;
+    //     int height;
 
-        public Tower(int idx, int height) {
-            this.idx = idx;
-            this.height = height;
-        }
+    //     public Tower(int idx, int height) {
+    //         this.idx = idx;
+    //         this.height = height;
+    //     }
 
-        @Override
-        public String toString() {
-            return "idx : " + idx + " height : " + height;
-        }
-    }
+    //     @Override
+    //     public String toString() {
+    //         return "idx : " + idx + " height : " + height;
+    //     }
+    // }
 
+    // public int[] solution(int[] heights) {
+    //     Stack<Tower> st = new Stack<>();
+    //     int[] answer = new int[heights.length];
+
+    //     for (int i = 0; i < heights.length; i++) {
+    //         Tower tower = new Tower(i + 1, heights[i]);
+    //         int receiveIdx = 0;
+
+    //         while (!st.isEmpty()) {
+    //             Tower top = st.peek();
+
+    //             if (top.height > tower.height) {
+    //                 receiveIdx = top.idx;
+    //                 break;
+    //             }
+
+    //             st.pop();
+    //         }
+
+    //         st.push(tower);
+    //         answer[i] = receiveIdx;
+    //     }
+
+    //     return answer;
+    // }
     public int[] solution(int[] heights) {
-        Stack<Tower> st = new Stack<>();
         int[] answer = new int[heights.length];
+        Stack<Integer> st = new Stack<Integer>();
+        
+        for(int value : heights){
+            st.push(value);
+        }
 
-        for (int i = 0; i < heights.length; i++) {
-            Tower tower = new Tower(i + 1, heights[i]);
-            int receiveIdx = 0;
-
-            while (!st.isEmpty()) {
-                Tower top = st.peek();
-
-                if (top.height > tower.height) {
-                    receiveIdx = top.idx;
+        while(!st.isEmpty()){
+            int temp = st.pop();
+            for(int j =st.size(); j > 0; j--){
+                if(heights[j-1] >= temp){
+                    answer[st.size()] = j;
                     break;
                 }
-
-                st.pop();
+                if(j == 0){
+                    answer[st.size()] = 0;
+                }
             }
-
-            st.push(tower);
-            answer[i] = receiveIdx;
         }
 
         return answer;
+    }
+
+    public static void main(String[] args) {
+        int[] value = {6, 9, 5, 7, 4};        
+        int[] answer = null;
+        
+        answer = new Tower().solution(value);
+        for(int out : answer){
+            System.out.println(out);
+        }
     }
 }

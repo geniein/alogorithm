@@ -19,19 +19,17 @@ public class LargestValue {
     private String solution(int[] numbers) {
         String answer = new String();
         /** 1 **/
-        String strNumbers[] = new String[numbers.length];
-        
+        String strNumbers[] = new String[numbers.length];        
         /** 2 **/
         for(int i=0; i<strNumbers.length; i++) {
-            strNumbers[i] = String.valueOf(numbers[i]);
-            System.out.println(strNumbers[i]+",");
+            strNumbers[i] = String.valueOf(numbers[i]);            
         }
         
         /** 3 **/        
         Arrays.sort(strNumbers, new Comparator<String>() {
             @Override
             public int compare(String number1, String number2) {
-                System.out.println("number1: "+number1 + " number2: "+number2);
+                System.out.println("number1: "+number1 + " number2: "+number2);                
                 return (number2+number1).compareTo(number1+number2);
             }
         });
@@ -57,6 +55,58 @@ public class LargestValue {
         String result = "";
         result = largestValue.solution(numbers);
         
-       //System.out.println("result : " + result);
+       System.out.println("result : " + result);
     }
 }
+
+
+
+
+// import java.util.*;
+// class Solution {
+//     public String solution(int[] numbers) {
+//         String answer = "";
+//         List<String> temp = new ArrayList<String>();
+        
+//         for(int i=0; i<numbers.length; i++){
+//             if(temp.isEmpty()){
+//                 temp.add(Integer.toString(numbers[0]));
+//                 continue;
+//             }
+//             String number = Integer.toString(numbers[i]);
+//             int forSize = 0;
+//             if(number.length() >= temp.get(0).length()){
+//                 forSize = temp.get(0).length();
+//             } else {
+//                 forSize = number.length();
+//             }
+//               for(int j =0; j<forSize; j++){
+//                  if(number.charAt(j) > temp.get(0).charAt(j)){
+//                    temp.add(0, number);
+//                    break;
+//                 } else if(number.charAt(j) < temp.get(0).charAt(j)){
+//                     temp.add(number); 
+//                     break;
+//                 } else {
+//                     if(forSize == j+1){
+//                         if(number.charAt(number.length()-1) > temp.get(0).charAt(temp.get(0).length()-1)){
+//                             temp.add(0, number);
+//                         } else {
+//                             temp.add(number);
+//                         }
+//                         break;
+//                     } else {
+//                         continue;
+//                     }
+//                 }
+//             } 
+//         }
+//         for (String result : temp) {
+//             answer += result;
+//         }
+        
+//         return answer;
+//     }
+    
+    
+// }

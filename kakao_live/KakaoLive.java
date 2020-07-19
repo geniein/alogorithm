@@ -1,3 +1,4 @@
+package kakao_live;
 import java.util.*;
 
 class Food implements Comparable<Food>{
