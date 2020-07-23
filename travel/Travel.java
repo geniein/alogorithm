@@ -16,17 +16,18 @@ public class Travel {
             this.marked = false;
         }
     }
+    List<List<String>> resultGlobal = new ArrayList<>();
     public Travel(String[][] tickets) {
         String[] answer = {};
         int ticketCount = tickets.length;
         boolean[] visist = new boolean[ticketCount];
-        List<String> result = new ArrayList<>();
+        
 
-        dfs(tickets,"ICN",visist,ticketCount,result);
-        answer = new String[result.size()];
-        for(int i =0; i<result.size();i++){
-            //System.out.println(result.get(i));
-            answer[i] = result.get(i);
+        dfs(tickets,"ICN",visist,ticketCount,new ArrayList<>());        
+        answer = new String[resultGlobal.get(0).size()];
+        for(int i =0; i<resultGlobal.get(0).size();i++){
+            System.out.println(resultGlobal.get(0).get(i));
+            answer[i] = resultGlobal.get(0).get(i);
         }
 
         //return answer;      
@@ -34,12 +35,14 @@ public class Travel {
 
     void dfs(String[][] tickets, String node, boolean[] visist, int ticketCount, List<String> result){         
         List<TicketDetail> nodeList = new ArrayList<>();
-        result.add(node);
-        System.out.println(ticketCount);
+        List<String> resultList = new ArrayList<>();
+        resultList.addAll(result);
+        resultList.add(node);                       
         if(ticketCount == 0){
-            for(int i =0; i<result.size();i++){
-                System.out.println(result.get(i));                
-            }
+            // for(int i =0; i<resultList.size();i++){
+            //     System.out.println(resultList.get(i));                
+            // }
+            resultGlobal.add(resultList);
             return;
         }
         for(int i =0; i< tickets.length; i++){
@@ -54,24 +57,19 @@ public class Travel {
             }
         });
 
-        if(!nodeList.isEmpty()){
-            ticketCount--;
-            for(TicketDetail td : nodeList){
+        if(!nodeList.isEmpty()){            
+            ticketCount--;            
+            for(TicketDetail td : nodeList){                
                 visist[td.index] = true;
-                //System.out.println(td.data[1] + "//" + nodeList.size());
-                // for(String v : result){
-                //     System.out.println(v);    
-                //     System.out.println("--");
-                // }
-                //System.out.println(ticketCount);
-                dfs(tickets,td.data[1], visist,ticketCount,result);
+                dfs(tickets,td.data[1], visist,ticketCount,resultList);
+                visist[td.index] = false;        
             }            
         }     
     }
     
     public static void main(String[] args) {
-        //String[][] tickets = {{"ICN", "SFO"}, {"ICN", "ATL"}, {"SFO", "ATL"}, {"ATL", "ICN"}, {"ATL", "SFO"}};
-        String[][] tickets = {{"ICN", "A"}, {"ICN", "B"},{"B", "ICN"}};
+        String[][] tickets = {{"ICN", "SFO"}, {"ICN", "ATL"}, {"SFO", "ATL"}, {"ATL", "ICN"}, {"ATL", "SFO"}};
+        //String[][] tickets = {{"ICN", "A"}, {"ICN", "B"},{"B", "ICN"},{"A","C"}};
         new Travel(tickets);
     }
 }
